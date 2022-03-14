@@ -1,0 +1,79 @@
+﻿@using WebApplication.Models
+@model WebApplication.Models.DonHang
+
+@{
+    ViewBag.Title = "Create";
+    var Cart = ViewBag.Cart as List<ChiTietDonHang>;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Your Information</h3>
+        </div>
+        <div class="col-lg-9">
+            @using (Html.BeginForm("Create", "DonHangs", FormMethod.Post, new { @class = "row contact_form" }))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p class="in-name">Name*</p>
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.EditorFor(model => model.HovaTen, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HovaTen, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-4">
+                        <p class="in-name">Phone*</p>
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-4">
+                        <p class="in-name">Street Address*</p>
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="payment-method">
+                            <button type="submit">Place your order</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="col-lg-3">
+            <div class="order-table">
+                <b> Your Order </b>
+                @foreach (var item in Cart)
+                {
+                    <div class="cart-item">
+                        <span>Product</span>
+                        <a href="@Url.Action("Details","SanPhams", new { id = item.SanPham1.ThongTinSanPham})"><p class="product-name">@item.SanPham1.ThongTinSanPham</p></a>
+                    </div>
+                    <div class="cart-item">
+                        <span>Price</span>
+                        <p>@(item.SanPham1.GiaTien * item.SoLuong) VNĐ</p>
+                    </div>
+                    <div class="cart-item">
+                        <span>Quantity</span>
+                        <p>@item.SoLuong</p>
+                    </div>
+                    <div class="cart-total">
+                        <span>Total</span>
+                        <p>@(Cart.Sum(c => c.SanPham1.GiaTien * c.SoLuong)) VNĐ</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

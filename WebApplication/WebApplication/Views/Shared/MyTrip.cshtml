@@ -1,0 +1,120 @@
+﻿@using WebApplication.Models
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyTrip</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/css/font-awesome.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/css/nice-select.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/css/owl.carousel.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/css/magnific-popup.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/css/slicknav.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")" type="text/css">
+</head>
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Search model -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form action="@Url.Action("Search","SanPhams")" method="get" class="search-model-form">
+                <input type="text" name="keyword" id="search-input" placeholder="Search here....." value="@ViewBag.Keyword">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="inner-header">
+                <div class="logo">
+                    <a href="@Url.Action("Index2", "SanPhams")"><img src="@Url.Content("~/img/logo10.png")" width="100" alt=""></a>
+                </div>
+                <div class="header-right">
+                    <img src="@Url.Content("~/img/icons/search.png")" alt="" class="search-trigger">
+                    <img src="@Url.Content("~/img/icons/man.png")" alt="">
+                    <a href="@Url.Action("Index","ShoppingCart")">
+                        <img src="@Url.Content("~/img/icons/bag.png")" alt="">
+                        @((Session["ShoppingCart"] as List<ChiTietDonHang>)?.Count)
+                    </a>
+                </div>
+                <div class="user-access">
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <a class="@Url.Action("Index2","SanPhams")" href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")" class="">Sign in</a>
+                    }
+                </div>
+                <nav class="main-menu mobile-menu">
+                    <ul>
+                        <li><a class="active" href="@Url.Action("Index2","SanPhams")">Home</a></li>
+                        <li><a href="@Url.Action("About" , "Home")">About</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- Header Info Begin -->
+    <!-- Header Info End -->
+    <!-- Header End -->
+    <!-- Hero Slider Begin -->
+    <!-- Hero Slider End -->
+    <!-- Features Section Begin -->
+    <!-- Features Section End -->
+    <!-- Latest Product Begin -->
+    <main>
+        <section class="latest-products spad">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </section>
+    </main>
+    <!-- Latest Product End -->
+    <!-- Lookbok Section Begin -->
+    <!-- Lookbok Section End -->
+    <!-- Logo Section Begin -->
+    <!-- Logo Section End -->
+    <!-- Footer Section Begin -->
+    <div class="container text-center pt-5">
+        <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+    </div>
+    <!-- Footer Section End -->
+    <!-- Js Plugins -->
+    <script src="@Url.Content("~/js/jquery-3.3.1.min.js")"></script>
+    <script src="@Url.Content("~/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.magnific-popup.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.slicknav.js")"></script>
+    <script src="@Url.Content("~/js/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("~/js/jquery.nice-select.min.js")"></script>
+    <script src="@Url.Content("~/js/mixitup.min.js")"></script>
+    <script src="@Url.Content("~/js/main.js")"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

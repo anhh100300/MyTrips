@@ -1,0 +1,51 @@
+﻿@model WebApplication.Models.SanPham
+@{
+    ViewBag.Title = "Details";
+}
+<section class="product-page">
+    <div class="container">
+        <div class="product-control">
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-slider owl-carousel owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(-1080px, 0px, 0px); transition: all 0.25s ease 0s; width: 3240px;">
+                            <div class="owl-item cloned" style="width: 540px;">
+                                <div class="product-img">
+                                    <figure>
+                                        <img src="@Url.Action("Picture",new { Model.MaSanPham })" alt="">
+                                        <div class="p-status">new</div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div><div class="owl-dots"><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product-content">
+                    <h2>@Model.ThongTinSanPham</h2>
+                    <div class="pc-meta">
+                        <h5>@Model.GiaTien VNĐ</h5>
+                        <h5>@Model.KhoiHanh</h5>
+                        <p>
+                            @MvcHtmlString.Create(Model.NoiDung)
+                        </p>
+                    </div>
+                    <form action="@Url.Action("Create","ShoppingCart")" method="post">
+                        <input type="hidden" name="ProductId" value="@Model.MaSanPham" />
+                        <div class="product-quantity">
+                            <div class="pro-qty">
+                                <span class="dec qtybtn"></span>
+                                <input name="Quantity" type="text" value="1">
+                                <span class="inc qtybtn"></span>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-info btn-lg pc-btn" value="Add to cart" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

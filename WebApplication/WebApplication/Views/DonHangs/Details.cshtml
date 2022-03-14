@@ -1,0 +1,58 @@
+﻿@model WebApplication.Models.DonHang
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DonHang</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HovaTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HovaTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoDienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoDienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PheDuyet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PheDuyet)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SoHoaDon }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

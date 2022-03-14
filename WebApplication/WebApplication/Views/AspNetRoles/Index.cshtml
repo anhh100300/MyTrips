@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebApplication.Models.AspNetRoles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Roles</h2>
+
+<p>
+
+    <a href="@Url.Action("Create")">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Roles</th>
+        <th>User</th>
+        <th></th>
+
+    </tr>
+
+    @foreach (var roles in Model)
+    {
+        <tr>
+            <td>
+                @roles.Name
+            </td>
+            <td></td>
+            <td>
+                <a href="@Url.Action("Edit",new { id = roles.Id })">Edit</a>
+                <a href="@Url.Action("Delete",new { id = roles.Id })">Delete</a>
+                <a href="@Url.Action("Create","AspNetRoleUser",new { roleid = roles.Id })">Add User</a>
+            </td>
+        </tr>
+        foreach (var user in roles.AspNetUsers)
+        {
+            <tr>
+                <td></td>
+                <td>@user.UserName</td>
+                <td>
+                    <a href="@Url.Action("Delete","Aspnetroleuser",new { roleid = roles.Id, userid = user.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>

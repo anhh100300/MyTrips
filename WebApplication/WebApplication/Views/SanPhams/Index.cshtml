@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebApplication.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Product List</h2>
+
+<p>
+    <a href="@Url.Action("Create")">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ThongTinSanPham
+        </th>
+        <th>
+            GiaTien
+        </th>
+        <th>
+            KhoiHanh
+        </th>
+        <th>
+            NoiDung
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                <a href="@Url.Action("Details", new { id= item.MaSanPham })" target="_blank">@item.ThongTinSanPham</a>
+            </td>
+            <td>
+                @item.GiaTien
+            </td>
+            <td>
+                @item.KhoiHanh
+            </td>
+
+
+            <td>
+                @if (item.NoiDung != null && item.NoiDung.Length > 100)
+                {
+                    @item.NoiDung.Substring(0, 100)
+                }
+                else
+                {
+                    <p>
+                        @MvcHtmlString.Create(item.NoiDung)
+                    </p>
+                }
+            </td>
+
+            <td>
+                <img src="@Url.Action("Picture", new { item.MaSanPham })" width="37px" height="40px" />
+            </td>
+            <td>
+
+                <a href="@Url.Action("Edit", new { id = item.MaSanPham})" class="btn btn-info btn-lg">
+                    Edit
+                </a>
+
+
+
+                <a href="@Url.Action("Delete", new { id = item.MaSanPham}) " class="btn btn-info btn-lg">
+                    Delete
+                </a>
+
+            </td>
+        </tr>
+    }
+
+</table>
